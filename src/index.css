@@ -7,7 +7,7 @@
 
 @layer components {
   .login-button {
-    @apply text-white bg-accentBlue hover:bg-primaryBlue  focus:ring-4 focus:outline-none focus:ring-gray-100 rounded-lg px-5 py-2.5 items-center inline-flex justify-center mb-2 w-full;
+    @apply text-white bg-accentBlue hover:bg-primaryBlue focus:ring-4 focus:outline-none focus:ring-gray-100 text-sm rounded-lg font-semibold px-5 py-2.5 items-center inline-flex justify-center mb-2 w-full;
   }
 }
 

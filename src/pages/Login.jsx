@@ -20,12 +20,12 @@ function Login({ setUser }) {
   }
 
   return (
-    <div className='flex items-center justify-center h-screen lg:justify-evenly'>
-      <div className='text-center ml-5'>
+    <div className='flex items-center justify-center h-screen lg:justify-evenly mx-5'>
+      <div className='text-center'>
         <h1 className='text-5xl font-semibold lg:text-6xl'>Shiftwork Buddy</h1>
         <p className='pt-3 lg:text-lg'>Your tracking and income assistant.</p>
 
-        <div className='w-full'>
+        <div className=''>
           <button
             type='button'
             onClick={() => login(googleProvider)}
@@ -36,7 +36,7 @@ function Login({ setUser }) {
               alt='google icon'
               className='mr-3 w-[30px]'
             />
-            <span className='font-semibold'>Login with Google</span>
+            <span>Login with Google</span>
           </button>
 
           <button
@@ -49,12 +49,12 @@ function Login({ setUser }) {
               alt='google icon'
               className='mr-3 w-[30px]'
             />
-            <span className='font-semibold'>Login with Github</span>
+            <span>Login with Github</span>
           </button>
         </div>
       </div>
 
-      <div className='hidden lg:block max-w-[800px] mr-5'>
+      <div className='hidden lg:block max-w-[800px] '>
         <img src='/login-art.svg' alt='login art' />
       </div>
     </div>
