@@ -5,9 +5,13 @@ import Home from "./pages/Home";
 function App() {
   const [user, setUser] = useState();
 
-  return (
+  return !user ? (
     <div>
       <Login setUser={setUser} />
+    </div>
+  ) : (
+    <div>
+      <Home />
     </div>
   );
 }
