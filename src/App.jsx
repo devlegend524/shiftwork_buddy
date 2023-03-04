@@ -1,18 +1,15 @@
 import { useState } from "react";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
+import { UserContext } from "./context/UserContext";
 
 function App() {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
 
-  return !user ? (
-    <div>
-      <Login setUser={setUser} />
-    </div>
-  ) : (
-    <div>
-      <Home />
-    </div>
+  return (
+    <UserContext.Provider value={{ user, setUser }}>
+      {!user ? <Login /> : <Home />}
+    </UserContext.Provider>
   );
 }
 

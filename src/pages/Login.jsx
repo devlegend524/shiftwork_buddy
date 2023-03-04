@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { UserContext } from "../context/UserContext";
 import {
   auth,
   googleProvider,
@@ -6,7 +8,9 @@ import {
   createUser,
 } from "/firebase";
 
-function Login({ setUser }) {
+function Login() {
+  const { setUser } = useContext(UserContext);
+
   function login(appProvider) {
     signInWithPopup(auth, appProvider).then((response) => {
       const userData = {
