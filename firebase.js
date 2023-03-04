@@ -24,7 +24,7 @@ const auth = getAuth(app);
 const db = getDatabase(app);
 
 function createUser(userObject) {
-  set(ref(db, "users/" + userObject.name), { userObject });
+  set(ref(db, "users/" + userObject.name), userObject);
 }
 
 export {
