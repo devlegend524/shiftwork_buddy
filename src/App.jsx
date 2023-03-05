@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { UserContext } from "./context/UserContext";
+
 import Login from "./pages/Login";
 import Home from "./pages/Home";
-import { UserContext } from "./context/UserContext";
 
 function App() {
   const [user, setUser] = useState(null);
