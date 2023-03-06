@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
+
 import {
   auth,
   googleProvider,
@@ -23,22 +24,36 @@ function Login() {
     });
   }
 
-  return (
-    <div className='flex items-center justify-center h-screen lg:justify-evenly mx-5'>
-      <div className='text-center'>
-        <h1 className='text-5xl font-semibold lg:text-6xl'>Shiftwork Buddy</h1>
-        <p className='pt-3 lg:text-lg'>Your tracking and income assistant.</p>
+  const style = {
+    loginContainer:
+      "flex items-center justify-center h-screen lg:justify-evenly mx-5",
+    innerContainer: "text-center",
+    heading: "text-4xl font-semibold lg:min-w-[500px] lg:text-6xl",
+    subHeading: "pt-3 lg:text-2xl",
+    buttonImage: "mr-3 w-[30px]",
+    googleButton:
+      "text-white bg-primaryBlue hover:bg-accentBlue focus:ring-4 focus:outline-none focus:ring-gray-100 rounded-lg font-semibold px-5 py-2.5 items-center inline-flex justify-center mb-2 w-full mt-10 lg:text-lg",
+    githubButton:
+      "text-white bg-primaryBlue hover:bg-accentBlue focus:ring-4 focus:outline-none focus:ring-gray-100 rounded-lg font-semibold px-5 py-2.5 items-center inline-flex justify-center mb-2 w-full mt-3 lg:text-lg",
+    loginArt: "hidden lg:block max-w-[800px]",
+  };
 
-        <div className=''>
+  return (
+    <div className={style.loginContainer}>
+      <div className={style.innerContainer}>
+        <h1 className={style.heading}>Shiftwork Buddy</h1>
+        <p className={style.subHeading}>Your tracking and income assistant.</p>
+
+        <div>
           <button
             type='button'
             onClick={() => login(googleProvider)}
-            className='login-button mt-10'
+            className={style.googleButton}
           >
             <img
-              src='/google-icon.svg'
+              src='/icons/google-icon.svg'
               alt='google icon'
-              className='mr-3 w-[30px]'
+              className={style.buttonImage}
             />
             <span>Login with Google</span>
           </button>
@@ -46,19 +61,19 @@ function Login() {
           <button
             type='button'
             onClick={() => login(githubProvider)}
-            className='login-button mt-3'
+            className={style.githubButton}
           >
             <img
-              src='/github-icon.svg'
+              src='/icons/github-icon.svg'
               alt='google icon'
-              className='mr-3 w-[30px]'
+              className={style.buttonImage}
             />
             <span>Login with Github</span>
           </button>
         </div>
       </div>
 
-      <div className='hidden lg:block max-w-[800px] '>
+      <div className={style.loginArt}>
         <img src='/login-art.svg' alt='login art' />
       </div>
     </div>

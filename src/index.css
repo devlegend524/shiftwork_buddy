@@ -1,31 +1,15 @@
-@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
-  .container-padding {
-    @apply p-4;
-  }
-
-  .login-button {
-    @apply text-white bg-accentBlue hover:bg-primaryBlue focus:ring-4 focus:outline-none focus:ring-gray-100 text-sm rounded-lg font-semibold px-5 py-2.5 items-center inline-flex justify-center mb-2 w-full;
-  }
+html,
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #f0f0f0;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Barlow Condensed", sans-serif;
-}
-
-p,
-span,
-button {
-  font-family: "Montserrat", sans-serif;
+.nav-menu-active {
+  top: 100%;
 }
