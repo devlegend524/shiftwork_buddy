@@ -1,37 +1,27 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, set } from "firebase/database";
+import { getFirestore } from "firebase/firestore";
+
 import {
   getAuth,
-  GoogleAuthProvider,
   signInWithPopup,
+  GoogleAuthProvider,
   GithubAuthProvider,
 } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
-  databaseURL: import.meta.env.VITE_DATABASE_URL,
-  projectId: "shiftwork-buddy",
-  storageBucket: "shiftwork-buddy.appspot.com",
-  messagingSenderId: "591111296118",
-  appId: import.meta.env.VITE_APP_ID,
+  apiKey: import.meta.env.VITE_FB_API_KEY,
+  authDomain: import.meta.env.VITE_FB_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FB_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FB_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FB_SENDER_ID,
+  appId: import.meta.env.VITE_FB_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const auth = getAuth();
 const googleProvider = new GoogleAuthProvider();
 const githubProvider = new GithubAuthProvider();
-const auth = getAuth(app);
-const db = getDatabase(app);
 
-function createUser(userObject) {
-  set(ref(db, "users/" + userObject.name), userObject);
-}
-
-export {
-  db,
-  googleProvider,
-  githubProvider,
-  auth,
-  signInWithPopup,
-  createUser,
-};
+export { db, auth, signInWithPopup, googleProvider, githubProvider };

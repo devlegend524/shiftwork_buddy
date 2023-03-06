@@ -3,24 +3,22 @@ import { UserContext } from "../context/UserContext";
 
 import {
   auth,
+  signInWithPopup,
   googleProvider,
   githubProvider,
-  signInWithPopup,
-  createUser,
 } from "/firebase";
 
 function Login() {
   const { setUser } = useContext(UserContext);
 
-  function login(appProvider) {
-    signInWithPopup(auth, appProvider).then((response) => {
+  function createUser(serviceProvider) {
+    signInWithPopup(auth, serviceProvider).then((result) => {
       const userData = {
-        name: response.user.displayName,
-        image: response.user.photoURL,
-        uid: response.user.uid,
+        name: result.user.displayName,
+        image: result.user.photoURL,
+        uid: result.user.uid,
       };
       setUser(userData);
-      createUser(userData);
     });
   }
 
@@ -47,8 +45,8 @@ function Login() {
         <div>
           <button
             type='button'
-            onClick={() => login(googleProvider)}
             className={style.googleButton}
+            onClick={() => createUser(googleProvider)}
           >
             <img
               src='/icons/google-icon.svg'
@@ -60,8 +58,8 @@ function Login() {
 
           <button
             type='button'
-            onClick={() => login(githubProvider)}
             className={style.githubButton}
+            onClick={() => createUser(githubProvider)}
           >
             <img
               src='/icons/github-icon.svg'
