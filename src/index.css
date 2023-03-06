@@ -7,14 +7,9 @@
 html,
 body {
   font-family: "Inter", sans-serif;
+  background-color: #f0f0f0;
 }
 
-@layer components {
-  .container-padding {
-    @apply p-3;
-  }
-
-  .container-x-margin {
-    @apply mx-3;
-  }
+.nav-menu-active {
+  top: 100%;
 }

@@ -28,8 +28,8 @@ function Login() {
     loginContainer:
       "flex items-center justify-center h-screen lg:justify-evenly mx-5",
     innerContainer: "text-center",
-    heading: "text-5xl font-semibold min-w-[500px] lg:text-6xl",
-    subHeading: "pt-3 text-xl lg:text-2xl",
+    heading: "text-4xl font-semibold lg:min-w-[500px] lg:text-6xl",
+    subHeading: "pt-3 lg:text-2xl",
     buttonImage: "mr-3 w-[30px]",
     googleButton:
       "text-white bg-primaryBlue hover:bg-accentBlue focus:ring-4 focus:outline-none focus:ring-gray-100 rounded-lg font-semibold px-5 py-2.5 items-center inline-flex justify-center mb-2 w-full mt-10 lg:text-lg",
@@ -51,7 +51,7 @@ function Login() {
             className={style.googleButton}
           >
             <img
-              src='/google-icon.svg'
+              src='/icons/google-icon.svg'
               alt='google icon'
               className={style.buttonImage}
             />
@@ -64,7 +64,7 @@ function Login() {
             className={style.githubButton}
           >
             <img
-              src='/github-icon.svg'
+              src='/icons/github-icon.svg'
               alt='google icon'
               className={style.buttonImage}
             />
