@@ -11,5 +11,5 @@ body {
 }
 
 .nav-menu-active {
-  top: 100%;
+  left: 0;
 }

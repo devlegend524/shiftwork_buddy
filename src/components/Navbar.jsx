@@ -2,22 +2,22 @@ import React, { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 
 function Navbar() {
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, hamburger, setHamburger } = useContext(UserContext);
 
   const style = {
     nav: "bg-white w-full",
     navInnerContainer:
       "relative flex items-center justify-between px-5 py-5 lg:max-w-[90rem] lg:mx-auto",
     navMenu:
-      "absolute w-full flex justify-between left-0 px-3 py-5 bg-primaryBlue text-white z-[-1] top-0 transition-all md:relative md:w-auto md:z-auto md:text-black md:bg-white md:transition-none",
+      "absolute w-full flex justify-between px-3 py-5 bg-primaryBlue text-white transition-all left-[-100%] top-full md:relative md:w-auto md:z-auto md:text-black md:bg-white md:transition-none",
     containerRight: "flex items-center gap-5",
-    hamburger: "relative w-9 hover:cursor-pointer z-[1] md:hidden",
+    hamburger: "relative w-9 hover:cursor-pointer md:hidden",
     heading: "text-2xl font-semibold md:text-3xl lg:text-4xl",
     user: "w-9 rounded-full hover:cursor-pointer lg:w-12",
     li: "flex items-center gap-2 md:pl-5",
     HamburgerlinkImage: "hidden w-5 md:block",
     linkImage: "w-5 md:hidden",
-    link: "text-lg lg:text-xl hover:cursor-pointer",
+    link: "lg:text-xl hover:cursor-pointer",
   };
 
   return (
@@ -29,7 +29,13 @@ function Navbar() {
           className={style.hamburger}
           onClick={() => {
             const navMenu = document.getElementById("nav-menu");
-            navMenu.classList.toggle("nav-menu-active");
+            if (!hamburger) {
+              navMenu.classList.add("nav-menu-active");
+              setHamburger(true);
+            } else {
+              navMenu.classList.remove("nav-menu-active");
+              setHamburger(false);
+            }
           }}
         />
         <h1 className={style.heading}>Shiftwork Buddy</h1>
