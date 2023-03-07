@@ -1,7 +1,9 @@
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
+import { doc, setDoc } from "firebase/firestore";
 
 import {
+  db,
   auth,
   signInWithPopup,
   googleProvider,
@@ -19,6 +21,7 @@ function Login() {
         uid: result.user.uid,
       };
       setUser(userData);
+      setDoc(doc(db, "users", userData.uid), userData, { merge: true });
     });
   }
 
