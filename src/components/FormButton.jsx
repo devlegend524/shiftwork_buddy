@@ -22,24 +22,24 @@ function DropdownButton({ dataObject, query, id, inputForm, setInputForm }) {
   }
 
   function displaySelectedValue() {
-    if (query === "Day") {
-      return inputForm.Day;
-    } else if (query === "Date") {
-      return inputForm.Date;
+    if (query === "day") {
+      return inputForm.day;
+    } else if (query === "date") {
+      return inputForm.date;
     } else {
-      return inputForm.Month;
+      return inputForm.month;
     }
   }
 
   const style = {
     dropdownButton:
-      "flex items-center justify-between w-full h-[50px] rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50",
+      "flex items-center justify-between w-full h-[50px] rounded-md bg-white px-3 py-2 font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50",
     menuContainer:
       "hidden absolute z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none",
-    selectedValue: " italic text-accentBlue",
+    selectedValue: "italic text-accentBlue text-sm",
     menuInner: "max-h-[400px] py-1 overflow-y-scroll",
     selectItem:
-      "text-gray-700 block px-4 py-2 text-sm transition-all hover:cursor-pointer hover:bg-accentBlue hover:text-white",
+      "text-gray-700 block px-4 py-2 transition-all hover:cursor-pointer hover:bg-accentBlue hover:text-white",
   };
 
   return (
