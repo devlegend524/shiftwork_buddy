@@ -14,12 +14,12 @@ function Shifts() {
     ul: "mt-10",
     li: "flex items-center justify-between p-3 bg-white rounded-lg",
     checkbox: "w-4 h-4",
-    span: "",
+    span: "text-sm",
     editIcon: "w-4",
   };
 
   return (
-    <div id='shift-container' className={style.container}>
+    <div className={style.container}>
       <div className={style.innerContainer}>
         <div className={style.topContainer}>
           <h2 className={style.heading}>Current Shifts</h2>
@@ -29,7 +29,7 @@ function Shifts() {
         <ul className={style.ul}>
           <li className={style.li}>
             <input type='checkbox' className={style.checkbox} />
-            <span className={style.span}>Sun 12th March</span>
+            <span className={style.span}>Sun 12th December</span>
             <span className={style.span}>2:45pm - 11pm</span>
             <img
               src='/icons/edit-icon.svg'
