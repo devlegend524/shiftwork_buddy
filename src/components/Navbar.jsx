@@ -12,6 +12,10 @@ function Navbar() {
     hamburgerRef.current.classList.toggle("hidden");
   }
 
+  function logoutUser() {
+    setUser(null);
+  }
+
   const style = {
     nav: "bg-white w-full",
     navInnerContainer:
@@ -65,21 +69,20 @@ function Navbar() {
                 alt='logout'
                 className={style.linkImage}
               />
-              <span className={style.link}>Logout</span>
+              <span className={style.link} onClick={logoutUser}>
+                Logout
+              </span>
             </li>
           </ul>
-          <img
-            src={user.image}
-            alt='user'
-            className={style.user}
-            onClick={() => {
-              setUser(null);
-            }}
-          />
+          <img src={user.image} alt='user' className={style.user} />
         </div>
       </div>
 
-      <HamburgerToggle hamburgerRef={hamburgerRef} Link={Link} />
+      <HamburgerToggle
+        hamburgerRef={hamburgerRef}
+        Link={Link}
+        logoutUser={logoutUser}
+      />
     </nav>
   );
 }

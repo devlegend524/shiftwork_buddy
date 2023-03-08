@@ -1,6 +1,6 @@
 import React from "react";
 
-function HamburgerToggle({ hamburgerRef, Link }) {
+function HamburgerToggle({ hamburgerRef, Link, logoutUser }) {
   const style = {
     hamNav:
       "hidden flex justify-between px-3 py-5 transition-all bg-primaryBlue text-white md:hidden",
@@ -37,7 +37,9 @@ function HamburgerToggle({ hamburgerRef, Link }) {
           alt='logout'
           className={style.HamburgerlinkImage}
         />
-        <span className={style.hamLink}>Logout</span>
+        <span className={style.hamLink} onClick={logoutUser}>
+          Logout
+        </span>
       </li>
     </ul>
   );
