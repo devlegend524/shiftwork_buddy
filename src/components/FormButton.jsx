@@ -17,6 +17,10 @@ function DropdownButton({ dataObject, query, id, inputForm, setInputForm }) {
     setInputForm({ ...inputForm, [query]: value });
   }
 
+  function capitalizeWord(word) {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  }
+
   function displaySelectedValue() {
     if (query === "Day") {
       return inputForm.Day;
@@ -48,7 +52,7 @@ function DropdownButton({ dataObject, query, id, inputForm, setInputForm }) {
           onBlur={closeDropDown}
           onClick={toggleDropDown}
         >
-          Select {query}:
+          Select {capitalizeWord(query)}:
           <p className={style.selectedValue}>{displaySelectedValue()}</p>
         </button>
       </div>
