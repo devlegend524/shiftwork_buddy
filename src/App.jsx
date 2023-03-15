@@ -9,7 +9,7 @@ import Account from "./pages/Account";
 
 function App() {
   const [user, setUser] = useState();
-  const [shifts, setShifts] = useState();
+  const [shifts, setShifts] = useState([]);
 
   return (
     <UserContext.Provider value={{ user, setUser, shifts, setShifts }}>
