@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import { UserContext } from "../../context/UserContext";
 import CreateShift from "./CreateShift";
 
 function Shifts() {
   const { user, shifts } = useContext(UserContext);
+  const createShiftRef = useRef();
 
   const style = {
     container: "relative p-5",
@@ -23,7 +24,9 @@ function Shifts() {
       <div className={style.innerContainer}>
         <div className={style.topContainer}>
           <h2 className={style.heading}>Current Shifts</h2>
-          <button className={style.createShift}>Create Shift</button>
+          <button ref={createShiftRef} className={style.createShift}>
+            Create Shift
+          </button>
         </div>
 
         <ul className={style.ul}>
@@ -40,7 +43,7 @@ function Shifts() {
         </ul>
       </div>
 
-      <CreateShift />
+      <CreateShift createShiftRef={createShiftRef} />
     </div>
   );
 }
