@@ -27,7 +27,7 @@ function Navbar() {
     user: "w-9 rounded-full hover:cursor-pointer lg:w-12",
     li: "hidden items-center gap-2 md:pl-5 md:flex",
     linkImage: "w-5",
-    link: "lg:text-xl hover:cursor-pointer",
+    link: "lg:text-lg hover:cursor-pointer",
   };
 
   return (
