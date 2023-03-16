@@ -15,7 +15,7 @@ function Shifts() {
   }, []);
 
   const style = {
-    container: "relative p-5",
+    container: "relative p-5 h-full",
     innerContainer: "mx-auto lg:max-w-[75rem]",
     topContainer: "flex items-center justify-between mt-5",
     heading: "text-xl font-semibold",

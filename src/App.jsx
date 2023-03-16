@@ -18,11 +18,15 @@ function App() {
       ) : (
         <>
           <BrowserRouter>
-            <Navbar />
-            <Routes>
-              <Route path='/' element={<Shifts />} />
-              <Route path='/account' element={<Account />} />
-            </Routes>
+            <div className='flex flex-col h-screen'>
+              <Navbar />
+              <div className='flex-1'>
+                <Routes>
+                  <Route path='/' element={<Shifts />} />
+                  <Route path='/account' element={<Account />} />
+                </Routes>
+              </div>
+            </div>
           </BrowserRouter>
         </>
       )}
