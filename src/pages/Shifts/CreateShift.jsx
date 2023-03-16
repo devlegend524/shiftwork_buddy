@@ -14,7 +14,7 @@ function CreateShift({ createShiftRef }) {
 
   document.addEventListener("click", (event) => {
     if (event.target === createShiftRef.current) {
-      document.getElementById("container").classList.remove("hidden");
+      document.getElementById("shift-container").classList.remove("hidden");
     }
   });
 
@@ -49,7 +49,7 @@ function CreateShift({ createShiftRef }) {
     const day = document.getElementById("day");
     const date = document.getElementById("date");
     const month = document.getElementById("month");
-    const container = document.getElementById("container");
+    const container = document.getElementById("shift-container");
 
     if (
       inputForm.day &&
@@ -71,7 +71,7 @@ function CreateShift({ createShiftRef }) {
   }
 
   const style = {
-    container: "hidden absolute w-full h-full top-0 left-0 p-5 ",
+    container: "hidden absolute w-full h-full top-0 left-0 p-5",
     form: "flex flex-col gap-8 h-full w-full bg-white rounded-lg p-5 mx-auto lg:max-w-[75rem]",
     topDiv: "flex items-center justify-between my-5",
     h1: "font-semibold text-xl",
@@ -86,7 +86,7 @@ function CreateShift({ createShiftRef }) {
   };
 
   return (
-    <div id='container' className={style.container}>
+    <div id='shift-container' className={style.container}>
       <form className={style.form}>
         <div className={style.topDiv}>
           <h1 className={style.h1}>Create Shift</h1>
@@ -95,7 +95,9 @@ function CreateShift({ createShiftRef }) {
             alt='close menu'
             className={style.image}
             onClick={() => {
-              document.getElementById("container").classList.add("hidden");
+              document
+                .getElementById("shift-container")
+                .classList.add("hidden");
             }}
           />
         </div>
