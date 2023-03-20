@@ -1,33 +1,53 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { db } from "../../../firebase";
-import { collection, onSnapshot } from "firebase/firestore";
+import {
+  collection,
+  onSnapshot,
+  doc,
+  deleteDoc,
+  setDoc,
+} from "firebase/firestore";
 import { UserContext } from "../../context/UserContext";
 import CreateShift from "./CreateShift";
+import Swal from "sweetalert2";
 
 function Shifts() {
   const { user, shifts, setShifts } = useContext(UserContext);
   const createShiftRef = useRef();
 
+  const shiftColRef = collection(db, `users/${user.uid}/shifts`);
+
   useEffect(() => {
-    onSnapshot(collection(db, `users/${user.uid}/shifts`), (snapshot) =>
+    onSnapshot(shiftColRef, (snapshot) =>
       setShifts(snapshot.docs.map((doc) => doc.data()))
     );
   }, []);
 
-  function showEditButtons(index) {
-    const list = document.getElementById(`ul-${index}`);
-    const editHTML = document.createElement("div");
-    editHTML.id = "edit";
+  function deleteShift(passedShift) {
+    const filtered = shifts.filter((shifts) => shifts.id === passedShift.id);
+    const selectedShiftId = filtered[0].id;
+    const docRef = doc(db, "users", user.uid, "shifts", selectedShiftId);
 
-    const divStyles = `flex justify-end gap-5 pt-5`;
-    editHTML.classList = divStyles;
+    Swal.fire({
+      text: "Are you sure you want to delete this shift?",
+      footer: `${passedShift.day} ${passedShift.date} ${passedShift.month}, ${passedShift.start}-${passedShift.finish}`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Delete",
+      confirmButtonColor: "#3f3d55",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteDoc(docRef);
+      } else null;
+    });
+  }
 
-    editHTML.innerHTML = `<button id='edit-shift' class='border p-1 rounded-md bg-accentBlue text-white w-[125px]'>Edit Shift</button>
-      <button id='delete-shift' class='border p-1 rounded-md bg-red-500 text-white w-[125px]'>Delete Shift</button>`;
+  async function setChecked(passedShift) {
+    const filtered = shifts.filter((shifts) => shifts.id === passedShift.id);
+    const selectedShiftId = filtered[0].id;
+    const docRef = doc(db, "users", user.uid, "shifts", selectedShiftId);
 
-    document.getElementById("edit")
-      ? document.getElementById("edit").remove()
-      : list.insertAdjacentElement("afterend", editHTML);
+    setDoc(docRef, { checked: !passedShift.checked }, { merge: true });
   }
 
   const style = {
@@ -37,10 +57,11 @@ function Shifts() {
     heading: "text-xl font-semibold",
     createShift: "w-32 p-1.5 text-base text-white rounded-md bg-primaryBlue",
     ul: "mt-10",
-    li: "flex items-center justify-between p-5 bg-white rounded-lg mt-5 h-14",
+    li: "flex items-center justify-between p-5 bg-white rounded-lg mt-5 ",
     span: "text-sm md:text-base w-1/2 text-left ml-12",
-    checkbox: "w-5 h-5 md:w-10 md:h-10",
-    editIcon: "w-4 md:w-5 hover:cursor-pointer",
+    checkbox: "w-5 h-5",
+    editIcon: "w-5 hover:cursor-pointer mr-5",
+    closeIcon: "w-6 hover:cursor-pointer",
   };
 
   return (
@@ -61,7 +82,12 @@ function Shifts() {
           {shifts.map((shift, index) => {
             return (
               <li className={style.li} key={index} id={`ul-${index}`}>
-                <input type='checkbox' className={style.checkbox} />
+                <input
+                  type='checkbox'
+                  checked={shift.checked ? true : false}
+                  className={style.checkbox}
+                  onChange={() => setChecked(shift)}
+                />
                 <span className={style.span}>
                   {shift.day} {shift.date} {shift.month}
                 </span>
@@ -69,11 +95,10 @@ function Shifts() {
                   {shift.start} - {shift.finish}
                 </span>
                 <img
-                  id={index}
-                  src='/icons/edit-icon.svg'
-                  alt='edit icon'
-                  className={style.editIcon}
-                  onClick={() => showEditButtons(index)}
+                  src='/icons/close-icon.svg'
+                  alt='delete icon'
+                  className={style.closeIcon}
+                  onClick={() => deleteShift(shift)}
                 />
               </li>
             );
