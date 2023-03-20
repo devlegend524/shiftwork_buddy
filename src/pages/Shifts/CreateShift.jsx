@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "../../context/UserContext";
 import { dropDownData } from "../../utils/ButtonData";
-import { doc, collection, addDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../../firebase";
 import Swal from "sweetalert2";
 
@@ -9,8 +9,14 @@ function CreateShift({ createShiftRef }) {
   const { user } = useContext(UserContext);
   const [inputForm, setInputForm] = useState([]);
 
-  const docRef = doc(db, "users", user.uid);
-  const colRef = collection(docRef, "shifts");
+  function createRandomID() {
+    return Date.now().toString(36) + Math.random().toString(36).substr(2);
+  }
+
+  inputForm.id = createRandomID();
+  inputForm.checked = false;
+
+  const docRef = doc(db, "users", user.uid, "shifts", inputForm.id);
 
   document.addEventListener("click", (event) => {
     if (event.target === createShiftRef.current) {
@@ -57,7 +63,7 @@ function CreateShift({ createShiftRef }) {
       inputForm.month &&
       validateTime(start.value, finish.value)
     ) {
-      addDoc(colRef, inputForm);
+      setDoc(docRef, inputForm);
       resetInputs();
       container.classList.add("hidden");
       Swal.fire({ text: "Your shift has been created!", icon: "success" });
