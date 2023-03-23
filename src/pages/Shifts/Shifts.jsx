@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { db } from "../../../firebase";
+import { monthKey } from "../../utils/ButtonData";
 import {
   collection,
   onSnapshot,
@@ -8,19 +9,26 @@ import {
   setDoc,
 } from "firebase/firestore";
 import { UserContext } from "../../context/UserContext";
-import CreateShift from "./CreateShift";
 import Swal from "sweetalert2";
 
+import Rate from "../../components/Rate";
+import CreateShift from "./CreateShift";
+import ShiftsSummary from "./ShiftsSummary";
+
 function Shifts() {
-  const { user, shifts, setShifts } = useContext(UserContext);
+  const { user, setUser, shifts, setShifts } = useContext(UserContext);
   const createShiftRef = useRef();
 
-  const shiftColRef = collection(db, `users/${user.uid}/shifts`);
-
   useEffect(() => {
+    const shiftColRef = collection(db, `users/${user.uid}/shifts`);
+    const userRef = doc(db, "users", user.uid);
+
     onSnapshot(shiftColRef, (snapshot) =>
       setShifts(snapshot.docs.map((doc) => doc.data()))
     );
+    onSnapshot(userRef, (snapshot) => {
+      setUser(snapshot.data());
+    });
   }, []);
 
   function deleteShift(passedShift) {
@@ -50,6 +58,26 @@ function Shifts() {
     setDoc(docRef, { checked: !passedShift.checked }, { merge: true });
   }
 
+  shifts.forEach((shift) => {
+    const date = Number(shift.date.slice(0, -2));
+    const month = monthKey[shift.month];
+    const year = new Date().getFullYear();
+
+    const convertedDate = `${month}/${date}/${year}`;
+    shift.convertedDate = convertedDate;
+  });
+
+  function sortShifts(a, b) {
+    const dateA = new Date(a.convertedDate);
+    const dateB = new Date(b.convertedDate);
+
+    if (dateA > dateB) return 1;
+    else if (dateA < dateB) return -1;
+    return 0;
+  }
+
+  shifts.sort(sortShifts);
+
   const style = {
     container: "relative p-5 h-full",
     innerContainer: "mx-auto lg:max-w-[75rem]",
@@ -64,7 +92,7 @@ function Shifts() {
     closeIcon: "w-6 hover:cursor-pointer",
   };
 
-  return (
+  return user.rate ? (
     <div className={style.container}>
       <div className={style.innerContainer}>
         <div className={style.topContainer}>
@@ -106,8 +134,12 @@ function Shifts() {
         </ul>
       </div>
 
+      <ShiftsSummary />
+
       <CreateShift createShiftRef={createShiftRef} />
     </div>
+  ) : (
+    <Rate />
   );
 }
 
