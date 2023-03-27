@@ -85,7 +85,9 @@ function Shifts() {
     heading: "text-xl font-semibold",
     createShift: "w-32 p-1.5 text-base text-white rounded-md bg-primaryBlue",
     ul: "mt-10",
-    li: "flex items-center justify-between p-5 bg-white rounded-lg mt-5 ",
+    li: "flex items-center justify-between p-5 bg-white rounded-lg mt-5",
+    checkedShift:
+      "flex items-center justify-between p-5 bg-green-200 rounded-lg mt-5",
     span: "text-sm md:text-base w-1/2 text-left ml-12",
     checkbox: "w-5 h-5",
     editIcon: "w-5 hover:cursor-pointer mr-5",
@@ -109,7 +111,11 @@ function Shifts() {
         <ul className={style.ul}>
           {shifts.map((shift, index) => {
             return (
-              <li className={style.li} key={index} id={`ul-${index}`}>
+              <li
+                className={shift.checked ? style.checkedShift : style.li}
+                key={index}
+                id={`ul-${index}`}
+              >
                 <input
                   type='checkbox'
                   checked={shift.checked ? true : false}
