@@ -50,6 +50,28 @@ function Shifts() {
     });
   }
 
+  function updateRate() {
+    const userRef = doc(db, "users", user.uid);
+    Swal.fire({
+      text: "Enter a new rate",
+      input: "number",
+      confirmButtonColor: "#3f3d55",
+      showCancelButton: true,
+      footer: `Your current rate is ${user.rate}/hr`,
+      inputValidator: (input) => {
+        if (!input) {
+          return "Please enter a valid rate";
+        } else {
+          setDoc(userRef, { rate: input }, { merge: true });
+          Swal.fire({
+            text: "Your rate has been updated",
+            icon: "success",
+          });
+        }
+      },
+    });
+  }
+
   async function setChecked(passedShift) {
     const filtered = shifts.filter((shifts) => shifts.id === passedShift.id);
     const selectedShiftId = filtered[0].id;
@@ -83,13 +105,16 @@ function Shifts() {
     innerContainer: "mx-auto lg:max-w-[75rem]",
     topContainer: "flex items-center justify-between mt-5",
     heading: "text-xl font-semibold",
+    buttonContainer: "flex flex-col gap-2 md:flex-row",
     createShift: "w-32 p-1.5 text-base text-white rounded-md bg-primaryBlue",
+    updateRate:
+      "w-32 p-1.5 text-base text-white rounded-md bg-primaryBlue md:ml-5",
     ul: "mt-10",
-    li: "flex items-center justify-between p-5 bg-white rounded-lg mt-5",
+    li: "flex items-center justify-between p-5 bg-white rounded-lg mt-5 md:flex-none",
     checkedShift:
-      "flex items-center justify-between p-5 bg-green-200 rounded-lg mt-5",
+      "flex items-center justify-between p-5 bg-gray-200 rounded-lg mt-5",
     span: "text-sm md:text-base w-1/2 text-left ml-12",
-    checkbox: "w-5 h-5",
+    checkbox: "w-5 h-5 accent-[#3f3d55]",
     editIcon: "w-5 hover:cursor-pointer mr-5",
     closeIcon: "w-6 hover:cursor-pointer",
   };
@@ -103,9 +128,16 @@ function Shifts() {
               ? "Current Shifts"
               : "You have no current shifts"}
           </h2>
-          <button ref={createShiftRef} className={style.createShift}>
-            Create Shift
-          </button>
+          <div className={style.buttonContainer}>
+            <button ref={createShiftRef} className={style.createShift}>
+              Create Shift
+            </button>
+            {user.rate ? (
+              <button className={style.updateRate} onClick={updateRate}>
+                Update Rate
+              </button>
+            ) : null}
+          </div>
         </div>
 
         <ul className={style.ul}>
