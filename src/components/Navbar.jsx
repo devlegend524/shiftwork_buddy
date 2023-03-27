@@ -1,6 +1,5 @@
 import React, { useContext, useRef } from "react";
 import { UserContext } from "../context/UserContext";
-import { Link } from "react-router-dom";
 
 import HamburgerToggle from "./HamburgerToggle";
 
@@ -45,26 +44,6 @@ function Navbar() {
           <ul className={style.navMenu}>
             <li className={style.li}>
               <img
-                src='/icons/clock-icon.svg'
-                alt='shifts'
-                className={style.linkImage}
-              />
-              <Link to={"/"} className={style.link}>
-                Shifts
-              </Link>
-            </li>
-            <li className={style.li}>
-              <img
-                src='/icons/settings-icon.svg'
-                alt='account'
-                className={style.linkImage}
-              />
-              <Link to={"/account"} className={style.link}>
-                Account
-              </Link>
-            </li>
-            <li className={style.li}>
-              <img
                 src='/icons/logout-icon.svg'
                 alt='logout'
                 className={style.linkImage}
@@ -74,15 +53,16 @@ function Navbar() {
               </span>
             </li>
           </ul>
-          <img src={user.image} alt='user' className={style.user} />
+          <img
+            src={user.image}
+            alt='user'
+            className={style.user}
+            onClick={logoutUser}
+          />
         </div>
       </div>
 
-      <HamburgerToggle
-        hamburgerRef={hamburgerRef}
-        Link={Link}
-        logoutUser={logoutUser}
-      />
+      <HamburgerToggle hamburgerRef={hamburgerRef} logoutUser={logoutUser} />
     </nav>
   );
 }

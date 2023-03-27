@@ -77,8 +77,8 @@ function CreateShift({ createShiftRef }) {
   }
 
   const style = {
-    container: "hidden absolute w-full h-full top-0 left-0 p-5",
-    form: "flex flex-col gap-8 h-full w-full bg-white rounded-lg p-5 mx-auto lg:max-w-[75rem]",
+    container: "hidden fixed w-full h-full top-0 left-0 p-5",
+    form: "flex flex-col gap-8 h-full w-full bg-white rounded-lg p-5 mx-auto lg:max-w-[75rem] shadow-lg",
     topDiv: "flex items-center justify-between my-5",
     h1: "font-semibold text-xl",
     image: "hover:cursor-pointer",

@@ -15,7 +15,7 @@ function Rate() {
     if (rate.value.length >= 1) {
       setDoc(userRef, { rate: rate.value }, { merge: true });
       Swal.fire({
-        text: "Your rate has been set, this can be changed from the account page",
+        text: "Your rate has been set, this can be changed at any time",
         icon: "success",
         confirmButtonColor: "#3f3d55",
       });
@@ -28,20 +28,21 @@ function Rate() {
   }
 
   const style = {
-    container: "flex items-center justify-center w-full h-full",
-    innerContainer: "flex flex-col gap-8 w-[90%]",
+    container: "flex items-center justify-center w-full h-full pt-10",
+    innerContainer: "flex flex-col gap-8 w-[80%]",
     h1: "font-semibold text-center text-xl",
     input:
-      "rounded-md p-3 text-sm text-center w-full max-w-[400px] mx-auto md:text-lg",
+      "rounded-md p-1.5 text-sm text-center w-full max-w-[400px] mx-auto md:text-lg",
     button:
-      "border p-2 rounded-md bg-accentBlue text-white w-full max-w-[400px] mx-auto md:text-lg",
+      "border p-1.5 rounded-md bg-accentBlue text-white w-full max-w-[400px] mx-auto md:text-lg",
   };
 
   return (
     <div className={style.container}>
       <div className={style.innerContainer}>
         <h1 className={style.h1}>
-          It looks like we don't have an hourly rate for this account yet?
+          {user.name.split(" ")[0]}, it looks like we don't have an hourly rate
+          for your account yet.
         </h1>
         <input
           id='rate-input'

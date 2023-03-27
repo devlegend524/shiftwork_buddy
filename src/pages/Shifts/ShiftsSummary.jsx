@@ -48,18 +48,21 @@ function ShiftsSummary() {
 
   calculateTax();
 
+  const style = {
+    container: "py-10 lg:max-w-[75rem] mx-auto",
+    h1: "font-semibold text-lg border-b border-black pb-3",
+    innerContainer: "pt-5",
+    netPay: "font-semibold text-[#6d66fa]",
+  };
+
   return shifts.length > 0 ? (
-    <div className='py-10 lg:max-w-[75rem] mx-auto'>
-      <h1 className='font-semibold text-lg border-b border-black pb-3'>
-        Payment Summary:
-      </h1>
-      <div className='pt-5'>
+    <div className={style.container}>
+      <h1 className={style.h1}>Payment Summary:</h1>
+      <div className={style.innerContainer}>
         <p>Total hours: {calculateHours()}</p>
         <p>Gross pay: ${grossIncome}</p>
         <p>Tax paid: {calculateTax() ? `-$${calculateTax()}` : `-$${0}`}</p>
-        <p className='font-semibold'>
-          Net pay: ${grossIncome - calculateTax()}
-        </p>
+        <p className={style.netPay}>Net pay: ${grossIncome - calculateTax()}</p>
       </div>
     </div>
   ) : null;
