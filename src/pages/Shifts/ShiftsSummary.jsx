@@ -38,13 +38,13 @@ function ShiftsSummary() {
       const nineteenCents = Math.floor(
         (((yearlyIncome - taxFree) / 26) * 19) / 100
       );
-      return nineteenCents;
+      return Math.floor(nineteenCents);
     } else if (yearlyIncome >= 45001 && yearlyIncome <= 120000) {
       const thirtyTwoCents = Math.floor(
         (((yearlyIncome - 45000) / 26) * 32.5) / 100
       );
-      return lowBracket + thirtyTwoCents;
-    } else if (yearlyIncome >= 120001 && yearlyIncome <= 180000) {
+      return Math.floor(lowBracket + thirtyTwoCents);
+    } else {
       const thirtySevenCents =
         ((Math.floor(yearlyIncome - 120000) / 26) * 37) / 100;
       return Math.floor(lowBracket + highBracket + thirtySevenCents);
@@ -55,14 +55,14 @@ function ShiftsSummary() {
 
   const style = {
     container: "py-10 lg:max-w-[75rem] mx-auto",
-    h1: "font-semibold text-lg border-b border-black pb-3",
+    h1: "font-semibold text-lg border-b border-gray-300 pb-2",
     innerContainer: "pt-5",
     netPay: "font-semibold text-[#6d66fa]",
   };
 
   return shifts.length > 0 ? (
     <div className={style.container}>
-      <h1 className={style.h1}>Payment Summary:</h1>
+      <h1 className={style.h1}>Shift Summary:</h1>
       <div className={style.innerContainer}>
         <p>Total hours: {calculateHours()}</p>
         <p>Gross pay: ${grossIncome}</p>
