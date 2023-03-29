@@ -106,9 +106,9 @@ function Shifts() {
     topContainer: "flex items-center justify-between mt-5",
     heading: "text-xl font-semibold",
     buttonContainer: "flex flex-col gap-2 md:flex-row",
-    createShift: "w-32 p-1.5 text-base text-white rounded-md bg-primaryBlue",
+    createShift: "w-32 p-1 text-base text-white rounded-md bg-primaryBlue",
     updateRate:
-      "w-32 p-1.5 text-base text-white rounded-md bg-primaryBlue md:ml-5",
+      "w-32 p-1 text-base text-white rounded-md bg-primaryBlue md:ml-5",
     ul: "mt-10",
     li: "flex items-center justify-between p-5 bg-white rounded-lg mt-5 md:flex-none",
     checkedShift:
