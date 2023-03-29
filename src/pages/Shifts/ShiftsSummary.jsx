@@ -29,20 +29,25 @@ function ShiftsSummary() {
 
   function calculateTax() {
     const taxFree = 18000;
-    const nineteenCents = Math.floor(
-      (((yearlyIncome - taxFree) / 26) * 19) / 100
-    );
-    const bracketDifference = Math.floor((((45000 - 18201) / 26) * 19) / 100);
-    const thirtyTwoCents = Math.floor(
-      (((yearlyIncome - 45000) / 26) * 32.5) / 100
-    );
+    const lowBracket = ((Math.floor(45000 - 18201) / 26) * 19) / 100;
+    const highBracket = (Math.floor((120000 - 45001) / 26) * 32.5) / 100;
 
     if (yearlyIncome < 18200) {
       return false;
     } else if (yearlyIncome >= 18201 && yearlyIncome <= 45000) {
+      const nineteenCents = Math.floor(
+        (((yearlyIncome - taxFree) / 26) * 19) / 100
+      );
       return nineteenCents;
-    } else {
-      return bracketDifference + thirtyTwoCents;
+    } else if (yearlyIncome >= 45001 && yearlyIncome <= 120000) {
+      const thirtyTwoCents = Math.floor(
+        (((yearlyIncome - 45000) / 26) * 32.5) / 100
+      );
+      return lowBracket + thirtyTwoCents;
+    } else if (yearlyIncome >= 120001 && yearlyIncome <= 180000) {
+      const thirtySevenCents =
+        ((Math.floor(yearlyIncome - 120000) / 26) * 37) / 100;
+      return Math.floor(lowBracket + highBracket + thirtySevenCents);
     }
   }
 
