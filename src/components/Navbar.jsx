@@ -23,18 +23,17 @@ function Navbar() {
     hamburger: "relative w-9 hover:cursor-pointer md:hidden",
     containerRight: "flex items-center gap-5",
     heading: "text-2xl font-semibold md:text-3xl lg:text-4xl",
-    user: "w-9 rounded-full hover:cursor-pointer lg:w-12",
-    li: "hidden items-center gap-2 md:pl-5 md:flex",
-    linkImage: "w-5",
-    link: "lg:text-lg hover:cursor-pointer",
+    user: "w-12 rounded-full hover:cursor-pointer",
+    li: "hidden items-center gap-2 md:flex",
+    link: "hover:cursor-pointer",
   };
 
   return (
     <nav className={style.nav}>
       <div className={style.navInnerContainer}>
         <img
-          src='/icons/hamburger-icon.svg'
-          alt='menu toggle'
+          src="/icons/hamburger-icon.svg"
+          alt="menu toggle"
           className={style.hamburger}
           onClick={toggleHamburger}
         />
@@ -43,11 +42,6 @@ function Navbar() {
         <div className={style.containerRight}>
           <ul className={style.navMenu}>
             <li className={style.li}>
-              <img
-                src='/icons/logout-icon.svg'
-                alt='logout'
-                className={style.linkImage}
-              />
               <span className={style.link} onClick={logoutUser}>
                 Logout
               </span>
@@ -55,7 +49,7 @@ function Navbar() {
           </ul>
           <img
             src={user.image}
-            alt='user'
+            alt="user"
             className={style.user}
             onClick={logoutUser}
           />

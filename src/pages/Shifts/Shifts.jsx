@@ -105,10 +105,10 @@ function Shifts() {
     innerContainer: "mx-auto lg:max-w-[75rem]",
     topContainer: "flex items-center justify-between mt-5",
     heading: "text-xl font-semibold",
-    buttonContainer: "flex flex-col gap-2 md:flex-row",
+    buttonContainer: "flex flex-col md:flex-row",
     createShift: "w-32 p-1 text-base text-white rounded-md bg-primaryBlue",
     updateRate:
-      "w-32 p-1 text-base text-white rounded-md bg-primaryBlue md:ml-5",
+      "w-32 p-1 text-base text-white rounded-md  mt-3 bg-primaryBlue md:ml-5 md:mt-0",
     ul: "mt-10",
     li: "flex items-center justify-between p-5 bg-white rounded-lg mt-5 md:flex-none",
     checkedShift:
@@ -149,7 +149,7 @@ function Shifts() {
                 id={`ul-${index}`}
               >
                 <input
-                  type='checkbox'
+                  type="checkbox"
                   checked={shift.checked ? true : false}
                   className={style.checkbox}
                   onChange={() => setChecked(shift)}
@@ -161,8 +161,8 @@ function Shifts() {
                   {shift.start} - {shift.finish}
                 </span>
                 <img
-                  src='/icons/close-icon.svg'
-                  alt='delete icon'
+                  src="/icons/close-icon.svg"
+                  alt="delete icon"
                   className={style.closeIcon}
                   onClick={() => deleteShift(shift)}
                 />
