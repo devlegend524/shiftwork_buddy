@@ -149,7 +149,7 @@ function Shifts() {
                 id={`ul-${index}`}
               >
                 <input
-                  type="checkbox"
+                  type='checkbox'
                   checked={shift.checked ? true : false}
                   className={style.checkbox}
                   onChange={() => setChecked(shift)}
@@ -161,8 +161,8 @@ function Shifts() {
                   {shift.start} - {shift.finish}
                 </span>
                 <img
-                  src="/icons/close-icon.svg"
-                  alt="delete icon"
+                  src='/icons/close-icon.svg'
+                  alt='delete icon'
                   className={style.closeIcon}
                   onClick={() => deleteShift(shift)}
                 />
