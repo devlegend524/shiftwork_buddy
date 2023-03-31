@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { UserContext } from "./context/UserContext";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
 import Shifts from "./pages/Shifts/Shifts";
+import Greeting from "./pages/Shifts/Greeting";
 
 function App() {
   const [user, setUser] = useState();
@@ -15,8 +17,13 @@ function App() {
         <Login />
       ) : (
         <>
-          <Navbar />
-          <Shifts />
+          <BrowserRouter>
+            <Navbar />
+            <Routes>
+              <Route path='/' element={<Greeting />} />
+              <Route path='/shifts' element={<Shifts />} />
+            </Routes>
+          </BrowserRouter>
         </>
       )}
     </UserContext.Provider>
