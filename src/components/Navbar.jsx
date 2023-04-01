@@ -67,7 +67,11 @@ function Navbar() {
         </div>
       </div>
 
-      <HamburgerToggle hamburgerRef={hamburgerRef} logoutUser={logoutUser} />
+      <HamburgerToggle
+        hamburgerRef={hamburgerRef}
+        logoutUser={logoutUser}
+        toggleHamburger={toggleHamburger}
+      />
     </nav>
   );
 }
