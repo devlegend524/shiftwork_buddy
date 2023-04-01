@@ -28,36 +28,29 @@ function Rate() {
   }
 
   const style = {
-    container: "flex items-center justify-center w-full h-full pt-10",
-    innerContainer: "flex flex-col gap-8 w-[80%]",
-    h1: "font-semibold text-center text-xl",
+    container:
+      "fixed flex flex-col items-center bottom-0 p-3 bg-accentBlue w-full",
+    h1: "text-center font-semibold text-white md:text-lg",
     input:
-      "rounded-md p-1.5 text-sm text-center w-full max-w-[400px] mx-auto md:text-lg",
+      "rounded-md mt-3 p-1.5 text-sm text-center w-full max-w-[400px] mx-auto md:text-lg",
     button:
-      "border p-1.5 rounded-md bg-accentBlue text-white w-full max-w-[400px] mx-auto md:text-lg",
+      "border mt-3 p-1.5 rounded-md bg-accentBlue text-white w-full max-w-[400px] mx-auto md:text-lg",
   };
 
   return (
     <div className={style.container}>
-      <div className={style.innerContainer}>
-        <h1 className={style.h1}>
-          {user.name.split(" ")[0]}, it looks like we don't have an hourly rate
-          for your account yet.
-        </h1>
-        <input
-          id='rate-input'
-          type='number'
-          placeholder='Please enter your rate'
-          className={style.input}
-        />
-        <button
-          type='submit'
-          onClick={handleRateSubmit}
-          className={style.button}
-        >
-          Submit
-        </button>
-      </div>
+      <h1 className={style.h1}>
+        It looks like we don't have an hourly rate for your account yet.
+      </h1>
+      <input
+        id='rate-input'
+        type='number'
+        placeholder='Please enter your rate'
+        className={style.input}
+      />
+      <button type='submit' onClick={handleRateSubmit} className={style.button}>
+        Confirm
+      </button>
     </div>
   );
 }

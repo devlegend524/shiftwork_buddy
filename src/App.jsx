@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
 import Shifts from "./pages/Shifts/Shifts";
 import Greeting from "./pages/Shifts/Greeting";
+import Rate from "./components/Rate";
 
 function App() {
   const [user, setUser] = useState();
@@ -23,6 +24,7 @@ function App() {
               <Route path='/' element={<Greeting />} />
               <Route path='/shifts' element={<Shifts />} />
             </Routes>
+            {!user.rate ? <Rate /> : null}
           </BrowserRouter>
         </>
       )}

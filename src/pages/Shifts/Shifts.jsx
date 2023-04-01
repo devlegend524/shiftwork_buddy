@@ -119,7 +119,7 @@ function Shifts() {
     closeIcon: "w-6 hover:cursor-pointer",
   };
 
-  return user.rate ? (
+  return (
     <div className={style.container}>
       <div className={style.innerContainer}>
         <div className={style.topContainer}>
@@ -173,11 +173,8 @@ function Shifts() {
       </div>
 
       <ShiftsSummary />
-
       <CreateShift createShiftRef={createShiftRef} />
     </div>
-  ) : (
-    <Rate />
   );
 }
 
