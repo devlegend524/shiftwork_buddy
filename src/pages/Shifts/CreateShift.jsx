@@ -78,27 +78,28 @@ function CreateShift({ createShiftRef }) {
 
   const style = {
     container: "hidden fixed w-full h-full top-0 left-0 p-5",
-    form: "flex flex-col gap-5 h-full w-full bg-white rounded-lg p-5 mx-auto lg:max-w-[75rem] shadow-lg",
-    topDiv: "flex items-center justify-between my-5",
-    h1: "font-semibold text-xl",
-    image: "hover:cursor-pointer",
-    selectContainer: "flex flex-col gap-5",
+    form: "flex flex-col items-center justify-center gap-5 h-full w-full bg-white rounded-lg p-5 mx-auto lg:max-w-[75rem] shadow-lg",
+    topDiv: "flex items-center justify-between my-5 w-full",
+    h1: "font-semibold text-xl md:text-2xl",
+    image: "hover:cursor-pointer w-5 md:w-7",
+    selectContainer: "flex flex-col gap-5 w-full",
     dropdownButton:
       "w-full h-[50px] rounded-md bg-white px-3 py-2 font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50",
-    inputContainer: "flex flex-col gap-5 pt-5",
+    inputContainer: "flex flex-col gap-5 pt-5 w-full",
     input: "border p-3 rounded-lg text-accentBlue italic text-sm font-semibold",
     button:
-      "border p-2 rounded-md bg-accentBlue text-white w-[150px] mb-5 mt-5",
+      "border p-2 rounded-md bg-accentBlue text-white w-[150px] mb-5 mt-5 w-2/3",
+    screen: "absolute h-screen w-screen bg-black opacity-50 z-[-10]",
   };
 
   return (
-    <div id="shift-container" className={style.container}>
+    <div id='shift-container' className={style.container}>
       <form className={style.form}>
         <div className={style.topDiv}>
           <h1 className={style.h1}>Create Shift</h1>
           <img
-            src="/icons/close-icon.svg"
-            alt="close menu"
+            src='/icons/close-icon.svg'
+            alt='close menu'
             className={style.image}
             onClick={() => {
               document
@@ -110,8 +111,8 @@ function CreateShift({ createShiftRef }) {
 
         <div className={style.selectContainer}>
           <select
-            id="day"
-            type="button"
+            id='day'
+            type='button'
             className={style.dropdownButton}
             onChange={() => handleDropDown(event.target.id)}
           >
@@ -125,8 +126,8 @@ function CreateShift({ createShiftRef }) {
             })}
           </select>
           <select
-            id="date"
-            type="button"
+            id='date'
+            type='button'
             className={style.dropdownButton}
             onChange={() => handleDropDown(event.target.id)}
           >
@@ -140,8 +141,8 @@ function CreateShift({ createShiftRef }) {
             })}
           </select>
           <select
-            id="month"
-            type="button"
+            id='month'
+            type='button'
             className={style.dropdownButton}
             onChange={() => handleDropDown(event.target.id)}
           >
@@ -158,25 +159,26 @@ function CreateShift({ createShiftRef }) {
 
         <div className={style.inputContainer}>
           <input
-            id="start"
-            type="number"
+            id='start'
+            type='number'
             className={style.input}
-            placeholder="Start time: 1445"
+            placeholder='Start time: 1445'
             onChange={() => handleStartFinish(event.target.id)}
           />
 
           <input
-            id="finish"
-            type="number"
+            id='finish'
+            type='number'
             className={style.input}
-            placeholder="Finish time: 2300"
+            placeholder='Finish time: 2300'
             onChange={() => handleStartFinish(event.target.id)}
           />
         </div>
 
-        <button type="button" className={style.button} onClick={handleSubmit}>
+        <button type='button' className={style.button} onClick={handleSubmit}>
           Submit Shift
         </button>
+        <div className={style.screen}></div>
       </form>
     </div>
   );
