@@ -11,13 +11,16 @@ import {
 import { UserContext } from "../../context/UserContext";
 import Swal from "sweetalert2";
 
-import Rate from "../../components/Rate";
 import CreateShift from "./CreateShift";
 import ShiftsSummary from "./ShiftsSummary";
 
 function Shifts() {
   const { user, setUser, shifts, setShifts } = useContext(UserContext);
   const createShiftRef = useRef();
+
+  const oldShifts = [];
+  const nowShifts = [];
+  const farShifts = [];
 
   useEffect(() => {
     const shiftColRef = collection(db, `users/${user.uid}/shifts`);
@@ -30,6 +33,20 @@ function Shifts() {
       setUser(snapshot.data());
     });
   }, []);
+
+  shifts.filter((shift) => {
+    const now = new Date();
+    const diff = Date.parse(shift?.convertedDate) - now;
+    const day = diff / 1000 / 60 / 60 / 24;
+
+    if (day < 0) {
+      oldShifts.push(shift);
+    } else if (day > 7) {
+      farShifts.push(shift);
+    } else {
+      nowShifts.push(shift);
+    }
+  });
 
   function deleteShift(passedShift) {
     const filtered = shifts.filter((shifts) => shifts.id === passedShift.id);
@@ -98,6 +115,11 @@ function Shifts() {
     return 0;
   }
 
+  function toggleCollapse(task) {
+    document.getElementById("collapse-icon").classList.toggle("rotate-90");
+    document.getElementById(`${task}-shifts`).classList.toggle("hidden");
+  }
+
   shifts.sort(sortShifts);
 
   const style = {
@@ -109,8 +131,12 @@ function Shifts() {
     createShift: "w-32 p-1 text-base text-white rounded-md bg-primaryBlue",
     updateRate:
       "w-32 p-1 text-base text-white rounded-md  mt-3 bg-primaryBlue md:ml-5 md:mt-0",
-    ul: "mt-10",
+    newUL: "mt-5 overflow-hidden border border-orange-200 rounded-md",
+    oldUL: "mt-5 overflow-hidden border border-green-200 rounded-md",
+    ul: "mt-5",
     li: "flex items-center justify-between p-5 bg-white rounded-lg mt-5 md:flex-none",
+    oldDIV: "flex items-center justify-between p-5 bg-green-100 rounded-md",
+    newDIV: "flex items-center justify-between p-5 bg-orange-100 rounded-md",
     checkedShift:
       "flex items-center justify-between p-5 bg-gray-200 rounded-lg mt-5",
     span: "text-sm md:text-base w-1/2 text-left ml-12",
@@ -140,8 +166,57 @@ function Shifts() {
           </div>
         </div>
 
+        {oldShifts.length >= 1 ? (
+          <ul
+            className={style.oldUL}
+            onClick={() => toggleCollapse("completed")}
+          >
+            <div className={style.oldDIV}>
+              <h2 className="font-semibold">Completed Shifts:</h2>
+              <img
+                id="collapse-icon"
+                className="transition-all rotate-[90]"
+                src="/icons/collapse-icon.svg"
+                alt="collapse icon"
+                width={25}
+              />
+            </div>
+
+            <div id="completed-shifts" className="hidden">
+              {oldShifts.map((shift, index) => {
+                return (
+                  <li
+                    className={shift.checked ? style.checkedShift : style.li}
+                    key={index}
+                    id={`ul-${index}`}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={shift.checked ? true : false}
+                      className={style.checkbox}
+                      onChange={() => setChecked(shift)}
+                    />
+                    <span className={style.span}>
+                      {shift.day} {shift.date} {shift.month}
+                    </span>
+                    <span className={style.span}>
+                      {shift.start} - {shift.finish}
+                    </span>
+                    <img
+                      src="/icons/close-icon.svg"
+                      alt="delete icon"
+                      className={style.closeIcon}
+                      onClick={() => deleteShift(shift)}
+                    />
+                  </li>
+                );
+              })}
+            </div>
+          </ul>
+        ) : null}
+
         <ul className={style.ul}>
-          {shifts.map((shift, index) => {
+          {nowShifts.map((shift, index) => {
             return (
               <li
                 className={shift.checked ? style.checkedShift : style.li}
@@ -149,7 +224,7 @@ function Shifts() {
                 id={`ul-${index}`}
               >
                 <input
-                  type='checkbox'
+                  type="checkbox"
                   checked={shift.checked ? true : false}
                   className={style.checkbox}
                   onChange={() => setChecked(shift)}
@@ -161,14 +236,57 @@ function Shifts() {
                   {shift.start} - {shift.finish}
                 </span>
                 <img
-                  src='/icons/close-icon.svg'
-                  alt='delete icon'
+                  src="/icons/close-icon.svg"
+                  alt="delete icon"
                   className={style.closeIcon}
                   onClick={() => deleteShift(shift)}
                 />
               </li>
             );
           })}
+        </ul>
+        <ul className={style.newUL} onClick={() => toggleCollapse("upcoming")}>
+          <div className={style.newDIV}>
+            <h2 className="font-semibold">Upcoming Shifts:</h2>
+            <img
+              id="collapse-icon"
+              className="transition-all rotate-[90]"
+              src="/icons/collapse-icon.svg"
+              alt="collapse icon"
+              width={25}
+            />
+          </div>
+
+          <div id="upcoming-shifts" className="hidden">
+            {farShifts.map((shift, index) => {
+              return (
+                <li
+                  className={shift.checked ? style.checkedShift : style.li}
+                  key={index}
+                  id={`ul-${index}`}
+                >
+                  <input
+                    type="checkbox"
+                    checked={shift.checked ? true : false}
+                    className={style.checkbox}
+                    onChange={() => setChecked(shift)}
+                  />
+                  <span className={style.span}>
+                    {shift.day} {shift.date} {shift.month}
+                  </span>
+                  <span className={style.span}>
+                    {shift.start} - {shift.finish}
+                  </span>
+                  <img
+                    src="/icons/close-icon.svg"
+                    alt="delete icon"
+                    className={style.closeIcon}
+                    onClick={() => deleteShift(shift)}
+                  />
+                </li>
+              );
+            })}
+          </div>
         </ul>
       </div>
 
