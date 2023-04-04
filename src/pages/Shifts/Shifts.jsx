@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { db } from "../../../firebase";
 import { monthKey } from "../../utils/ButtonData";
 import {
@@ -14,9 +14,11 @@ import Swal from "sweetalert2";
 import CreateShift from "./CreateShift";
 import ShiftsSummary from "./ShiftsSummary";
 import Rate from "../../components/Rate";
+import Loader from "../../components/Loader";
 
 function Shifts() {
   const { user, setUser, shifts, setShifts } = useContext(UserContext);
+  const [loading, setLoading] = useState(true);
   const createShiftRef = useRef();
 
   const oldShifts = [];
@@ -33,6 +35,10 @@ function Shifts() {
     onSnapshot(userRef, (snapshot) => {
       setUser(snapshot.data());
     });
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
   }, []);
 
   shifts.filter((shift) => {
@@ -147,7 +153,9 @@ function Shifts() {
     closeIcon: "w-5 hover:cursor-pointer",
   };
 
-  return (
+  return loading ? (
+    <Loader />
+  ) : (
     <div className={style.container}>
       <div className={style.innerContainer}>
         <div className={style.topContainer}>
