@@ -29,7 +29,7 @@ function Rate() {
 
   const style = {
     container:
-      "fixed flex flex-col items-center bottom-0 p-3 bg-accentBlue w-full",
+      "fixed flex flex-col items-center left-0 bottom-0 p-3 bg-accentBlue w-full",
     h1: "text-center font-semibold text-white md:text-lg",
     input:
       "rounded-md mt-3 p-1.5 text-sm text-center w-full max-w-[400px] mx-auto md:text-lg",
