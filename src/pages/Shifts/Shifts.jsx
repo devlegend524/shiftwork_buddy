@@ -41,7 +41,7 @@ function Shifts() {
     const day = diff / 1000 / 60 / 60 / 24;
 
     if (day < 0 || shift.checked) {
-      shift.checked === true;
+      shift.checked = true;
       oldShifts.push(shift);
     } else if (day > 7) {
       farShifts.push(shift);
@@ -168,7 +168,7 @@ function Shifts() {
           </div>
         </div>
 
-        {oldShifts.length >= 1 ? (
+        {oldShifts?.length >= 1 ? (
           <ul
             className={style.oldUL}
             onClick={() => toggleCollapse("completed")}
@@ -248,7 +248,7 @@ function Shifts() {
           })}
         </ul>
 
-        {farShifts.length >= 1 ? (
+        {farShifts?.length >= 1 ? (
           <ul
             className={style.newUL}
             onClick={() => toggleCollapse("upcoming")}
