@@ -13,6 +13,7 @@ import Swal from "sweetalert2";
 
 import CreateShift from "./CreateShift";
 import ShiftsSummary from "./ShiftsSummary";
+import Rate from "../../components/Rate";
 
 function Shifts() {
   const { user, setUser, shifts, setShifts } = useContext(UserContext);
@@ -172,17 +173,17 @@ function Shifts() {
             onClick={() => toggleCollapse("completed")}
           >
             <div className={style.oldDIV}>
-              <h2 className="font-semibold">Completed Shifts:</h2>
+              <h2 className='font-semibold'>Completed Shifts:</h2>
               <img
-                id="collapse-icon"
-                className="transition-all rotate-[90]"
-                src="/icons/collapse-icon.svg"
-                alt="collapse icon"
+                id='collapse-icon'
+                className='transition-all rotate-[90]'
+                src='/icons/collapse-icon.svg'
+                alt='collapse icon'
                 width={25}
               />
             </div>
 
-            <div id="completed-shifts" className="hidden">
+            <div id='completed-shifts' className='hidden'>
               {oldShifts.map((shift, index) => {
                 return (
                   <li
@@ -191,7 +192,7 @@ function Shifts() {
                     id={`ul-${index}`}
                   >
                     <input
-                      type="checkbox"
+                      type='checkbox'
                       checked={shift.checked ? true : false}
                       className={style.checkbox}
                       onChange={() => setChecked(shift)}
@@ -203,8 +204,8 @@ function Shifts() {
                       {shift.start} - {shift.finish}
                     </span>
                     <img
-                      src="/icons/close-icon.svg"
-                      alt="delete icon"
+                      src='/icons/close-icon.svg'
+                      alt='delete icon'
                       className={style.closeIcon}
                       onClick={() => deleteShift(shift)}
                     />
@@ -224,7 +225,7 @@ function Shifts() {
                 id={`ul-${index}`}
               >
                 <input
-                  type="checkbox"
+                  type='checkbox'
                   checked={shift.checked ? true : false}
                   className={style.checkbox}
                   onChange={() => setChecked(shift)}
@@ -236,8 +237,8 @@ function Shifts() {
                   {shift.start} - {shift.finish}
                 </span>
                 <img
-                  src="/icons/close-icon.svg"
-                  alt="delete icon"
+                  src='/icons/close-icon.svg'
+                  alt='delete icon'
                   className={style.closeIcon}
                   onClick={() => deleteShift(shift)}
                 />
@@ -245,53 +246,60 @@ function Shifts() {
             );
           })}
         </ul>
-        <ul className={style.newUL} onClick={() => toggleCollapse("upcoming")}>
-          <div className={style.newDIV}>
-            <h2 className="font-semibold">Upcoming Shifts:</h2>
-            <img
-              id="collapse-icon"
-              className="transition-all rotate-[90]"
-              src="/icons/collapse-icon.svg"
-              alt="collapse icon"
-              width={25}
-            />
-          </div>
 
-          <div id="upcoming-shifts" className="hidden">
-            {farShifts.map((shift, index) => {
-              return (
-                <li
-                  className={shift.checked ? style.checkedShift : style.li}
-                  key={index}
-                  id={`ul-${index}`}
-                >
-                  <input
-                    type="checkbox"
-                    checked={shift.checked ? true : false}
-                    className={style.checkbox}
-                    onChange={() => setChecked(shift)}
-                  />
-                  <span className={style.span}>
-                    {shift.day} {shift.date} {shift.month}
-                  </span>
-                  <span className={style.span}>
-                    {shift.start} - {shift.finish}
-                  </span>
-                  <img
-                    src="/icons/close-icon.svg"
-                    alt="delete icon"
-                    className={style.closeIcon}
-                    onClick={() => deleteShift(shift)}
-                  />
-                </li>
-              );
-            })}
-          </div>
-        </ul>
+        {farShifts.length >= 1 ? (
+          <ul
+            className={style.newUL}
+            onClick={() => toggleCollapse("upcoming")}
+          >
+            <div className={style.newDIV}>
+              <h2 className='font-semibold'>Upcoming Shifts:</h2>
+              <img
+                id='collapse-icon'
+                className='transition-all rotate-[90]'
+                src='/icons/collapse-icon.svg'
+                alt='collapse icon'
+                width={25}
+              />
+            </div>
+
+            <div id='upcoming-shifts' className='hidden'>
+              {farShifts.map((shift, index) => {
+                return (
+                  <li
+                    className={shift.checked ? style.checkedShift : style.li}
+                    key={index}
+                    id={`ul-${index}`}
+                  >
+                    <input
+                      type='checkbox'
+                      checked={shift.checked ? true : false}
+                      className={style.checkbox}
+                      onChange={() => setChecked(shift)}
+                    />
+                    <span className={style.span}>
+                      {shift.day} {shift.date} {shift.month}
+                    </span>
+                    <span className={style.span}>
+                      {shift.start} - {shift.finish}
+                    </span>
+                    <img
+                      src='/icons/close-icon.svg'
+                      alt='delete icon'
+                      className={style.closeIcon}
+                      onClick={() => deleteShift(shift)}
+                    />
+                  </li>
+                );
+              })}
+            </div>
+          </ul>
+        ) : null}
       </div>
 
       <ShiftsSummary />
       <CreateShift createShiftRef={createShiftRef} />
+      {!user.rate ? <Rate /> : null}
     </div>
   );
 }
