@@ -143,7 +143,7 @@ function Shifts() {
     span: "text-sm md:text-base w-1/2 text-left ml-12",
     checkbox: "w-5 h-5 accent-[#3f3d55]",
     editIcon: "w-5 hover:cursor-pointer mr-5",
-    closeIcon: "w-6 hover:cursor-pointer",
+    closeIcon: "w-5 hover:cursor-pointer",
   };
 
   return (
