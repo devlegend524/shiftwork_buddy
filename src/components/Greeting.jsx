@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import { UserContext } from "../../context/UserContext";
+import { UserContext } from "../context/UserContext";
 
 const style = {
   container:
-    "absolute flex flex-col items-center justify-center w-full top-[35%] p-5",
+    "absolute flex flex-col items-center justify-center w-full top-[45%] p-5",
   h2: "text-2xl text-center font-semibold",
   lowerContainer: "text-center mt-5 md:text-lg",
   boldH: "text-[#6d66fa]",
