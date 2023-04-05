@@ -8,12 +8,13 @@ import Shifts from "./pages/Shifts/Shifts";
 import Greeting from "./components/Greeting";
 
 function App() {
-  const [user, setUser] = useState();
+  const localUser = JSON.parse(localStorage.getItem("user"));
+  const [user, setUser] = useState(localUser);
   const [shifts, setShifts] = useState([]);
 
   return (
     <UserContext.Provider value={{ user, setUser, shifts, setShifts }}>
-      {!user ? (
+      {!user || !localUser ? (
         <Login />
       ) : (
         <>

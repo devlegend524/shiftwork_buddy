@@ -21,6 +21,7 @@ function Login() {
         uid: result.user.uid,
       };
       setUser(userData);
+      localStorage.setItem("user", JSON.stringify(userData));
       setDoc(doc(db, "users", userData.uid), userData, { merge: true });
     });
   }
