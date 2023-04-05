@@ -26,6 +26,7 @@ function Shifts() {
   const farShifts = [];
 
   useEffect(() => {
+    setLoading(true);
     const shiftColRef = collection(db, `users/${user.uid}/shifts`);
     const userRef = doc(db, "users", user.uid);
 
