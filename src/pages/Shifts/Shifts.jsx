@@ -46,8 +46,7 @@ function Shifts() {
     const diff = Date.parse(shift?.convertedDate) - now;
     const day = diff / 1000 / 60 / 60 / 24;
 
-    if (day < 0 || shift.checked) {
-      shift.checked = true;
+    if (shift.checked) {
       oldShifts.push(shift);
     } else if (day > 7) {
       farShifts.push(shift);
