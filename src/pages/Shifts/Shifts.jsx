@@ -25,23 +25,6 @@ function Shifts() {
   const nowShifts = [];
   const farShifts = [];
 
-  useEffect(() => {
-    setLoading(true);
-    const shiftColRef = collection(db, `users/${user.uid}/shifts`);
-    const userRef = doc(db, "users", user.uid);
-
-    onSnapshot(shiftColRef, (snapshot) =>
-      setShifts(snapshot.docs.map((doc) => doc.data()))
-    );
-    onSnapshot(userRef, (snapshot) => {
-      setUser(snapshot.data());
-    });
-
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  }, []);
-
   shifts.filter((shift) => {
     const now = new Date();
     const diff = Date.parse(shift?.convertedDate) - now;
@@ -129,6 +112,22 @@ function Shifts() {
   }
 
   shifts.sort(sortShifts);
+
+  useEffect(() => {
+    const shiftColRef = collection(db, `users/${user.uid}/shifts`);
+    const userRef = doc(db, "users", user.uid);
+
+    onSnapshot(shiftColRef, (snapshot) =>
+      setShifts(snapshot.docs.map((doc) => doc.data()))
+    );
+    onSnapshot(userRef, (snapshot) => {
+      setUser(snapshot.data());
+    });
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
 
   const style = {
     container: "relative p-5 h-full",
