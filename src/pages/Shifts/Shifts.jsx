@@ -127,7 +127,7 @@ function Shifts() {
     setTimeout(() => {
       setLoading(false);
     }, 1000);
-  }, []);
+  }, [shifts.length]);
 
   const style = {
     container: "relative p-5 h-full",
